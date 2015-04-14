@@ -22,25 +22,72 @@
             padding: 20px;
             border: 1px solid black;
         }
+        div.examples {
+            margin-bottom: 10px;
+            margin-top: 10px;
+        }
+        div.action-buttons {
+            margin: 0px auto;
+        }
+        span.render-type-label {
+            font-size: 20px;
+            font-weight: bold;
+            color: #337ab7;
+        }
     </style>
 </head>
-    <h1 id="title">Varafy</h1>
-    <h3><i>KaTeX vs. MathJax</i></h3>
-    <div class="row">
-        <div id="katex_content" class="latex_container col-md-6">
-            $$r = (x_2-x_1)\vec{i}+(y_2-y_1)\vec{j}+(z_2-z_1)\vec{k}$$
-            $$+\uparrow\sum F_x=0,\sum F_y=0,\sum F_z=0$$
-            $$+\circlearrowright\sum M_o = 0$$
-            $$x = \frac{ - b \pm \sqrt {b^2 - 4ac} }{2a}$$
-            $$f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+    <h3><i>KaTeX vs. MathJax </i><b>Examples</b></h3>
+    <div class="examples">
+        <ul class="nav nav-pills" role="tablist" id="myTab">
+            <li role="presentation" class="active"><a href="#render-speed" aria-controls="render-speed" role="tab" data-toggle="tab">Render Speed</a></li>
+            <li role="presentation"><a href="#text-wrap" aria-controls="text-wrap" role="tab" data-toggle="tab">Text Wrap</a></li>
+            <li role="presentation"><a href="#symbol-support" aria-controls="symbol-support" role="tab" data-toggle="tab">Symbol Support</a></li>
+            <li role="presentation"><a href="#pdf-rendering" aria-controls="pdf-rendering" role="tab" data-toggle="tab">PDF Rendering</a></li>
+        </ul>
+    </div>
+    <div class="action-buttons">
+        <div id="render-speed-actions" class="btn-group" role="group">
+            <button id='randomize' type="button" class="btn bnt-lg btn-default"><span class="glyphicon glyphicon-refresh"></span> Randomize</button>
         </div>
-        <div id="mathjax_content" class="latex_container col-md-6">
-            $$r = (x_2-x_1)\vec{i}+(y_2-y_1)\vec{j}+(z_2-z_1)\vec{k}$$
-            $$+\uparrow\sum F_x=0,\sum F_y=0,\sum F_z=0$$
-            $$+\circlearrowright\sum M_o = 0$$
-            $$x = \frac{ - b \pm \sqrt {b^2 - 4ac} }{2a}$$
-            $$f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+        <div id="text-wrap-actions" class="btn-group" role="group" style="display:none;">
+            <button type="button" class="btn btn-default">Action</button>
         </div>
+        <div id="symbol-support-actions" class="btn-group" role="group" style="display:none;">
+            <button type="button" class="btn btn-default">Action</button>
+        </div>
+        <div id="pdf-rendering-actions" class="btn-group" role="group" style="display:none;">
+            <button type="button" class="btn btn-default">Action</button>
+        </div>
+    </div>
+    <br>
+    <div class="tab-content">
+        <div role="tabpanel" class="tab-pane active" id="render-speed">
+            <div class="row">
+                <div class="latex_container col-md-6">
+                    <span class="render-type-label">KaTeX</span>
+                    <div class="katex_content">
+                    $$r = (x_2-x_1)\vec{i}+(y_2-y_1)\vec{j}+(z_2-z_1)\vec{k}$$
+                    $$+\uparrow\sum F_x=0,\sum F_y=0,\sum F_z=0$$
+                    $$+\circlearrowright\sum M_o = 0$$
+                    $$x = \frac{ - b \pm \sqrt {b^2 - 4ac} }{2a}$$
+                    $$f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+                    </div>
+                </div>
+                <div class="latex_container col-md-6">
+                    <span class="render-type-label">MathJax</span>
+                    <div class="mathjax_content">
+                        $$r = (x_2-x_1)\vec{i}+(y_2-y_1)\vec{j}+(z_2-z_1)\vec{k}$$
+                        $$+\uparrow\sum F_x=0,\sum F_y=0,\sum F_z=0$$
+                        $$+\circlearrowright\sum M_o = 0$$
+                        $$x = \frac{ - b \pm \sqrt {b^2 - 4ac} }{2a}$$
+                        $$f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="text-wrap">Text Wrap SOON TO COME!</div>
+        <div role="tabpanel" class="tab-pane" id="symbol-support">Symbol Support SOON TO COME!</div>
+        <div role="tabpanel" class="tab-pane" id="pdf-rendering">PDF Rendering SOON TO COME!</div>
     </div>
     <script src="main.js"></script>
 </body>
