@@ -8,6 +8,11 @@
     <script src="katex/katex.min.js"></script>
     <script src="katex/contrib/auto-render.min.js"></script>
     <!-- MathJax -->
+    <script type="text/x-mathjax-config">
+        MathJax.Hub.Config({
+            tex2jax: {inlineMath: [['$','$'], ['\\(','\\)']]}
+        });
+    </script>
     <script src="https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
     <!-- jQuery -->
     <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
@@ -66,11 +71,12 @@
                 <div class="latex_container col-md-6">
                     <span class="render-type-label">KaTeX</span>
                     <div class="katex_content">
-                    $$r = (x_2-x_1)\vec{i}+(y_2-y_1)\vec{j}+(z_2-z_1)\vec{k}$$
-                    $$+\uparrow\sum F_x=0,\sum F_y=0,\sum F_z=0$$
-                    $$+\circlearrowright\sum M_o = 0$$
-                    $$x = \frac{ - b \pm \sqrt {b^2 - 4ac} }{2a}$$
-                    $$f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+                        $$r = (x_2-x_1)\vec{i}+(y_2-y_1)\vec{j}+(z_2-z_1)\vec{k}$$
+                        $$+\uparrow\sum F_x=0,\sum F_y=0,\sum F_z=0$$
+                        $$+\circlearrowright\sum M_o = 0$$
+                        $$x = \frac{ - b \pm \sqrt {b^2 - 4ac} }{2a}$$
+                        $$f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+                        $$\int u \frac{dv}{dx}\,dx=uv-\int \frac{du}{dx}v\,dx$$
                     </div>
                 </div>
                 <div class="latex_container col-md-6">
@@ -81,12 +87,61 @@
                         $$+\circlearrowright\sum M_o = 0$$
                         $$x = \frac{ - b \pm \sqrt {b^2 - 4ac} }{2a}$$
                         $$f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$$
+                        $$\int u \frac{dv}{dx}\,dx=uv-\int \frac{du}{dx}v\,dx$$
                     </div>
                 </div>
             </div>
         </div>
-        <div role="tabpanel" class="tab-pane" id="text-wrap">Text Wrap SOON TO COME!</div>
-        <div role="tabpanel" class="tab-pane" id="symbol-support">Symbol Support SOON TO COME!</div>
+        <div role="tabpanel" class="tab-pane" id="text-wrap">
+            <div class="row">
+                <div class="latex_container col-md-6">
+                    <span class="render-type-label">KaTeX</span>
+                    <div class="katex_content">
+                        Lorem ipsum dolor sit amet, $r = (x_2-x_1)\vec{i}+(y_2-y_1)\vec{j}+(z_2-z_1)\vec{k}$
+                        consectetur adipiscing elit, sed $+\uparrow\sum F_x=0,\sum F_y=0,\sum F_z=0$ do eiusmod tempor
+                        incididunt ut $+\circlearrowright\sum M_o = 0$ labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco $x = \frac{ - b \pm \sqrt {b^2 - 4ac} }{2a}$
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt $f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$ mollit anim id est laborum.
+                    </div>
+                </div>
+                <div class="latex_container col-md-6">
+                    <span class="render-type-label">MathJax</span>
+                    <div class="mathjax_content">
+                        Lorem ipsum dolor sit amet, $r = (x_2-x_1)\vec{i}+(y_2-y_1)\vec{j}+(z_2-z_1)\vec{k}$
+                        consectetur adipiscing elit, sed $+\uparrow\sum F_x=0,\sum F_y=0,\sum F_z=0$ do eiusmod tempor
+                        incididunt ut $+\circlearrowright\sum M_o = 0$ labore et dolore magna aliqua.
+                        Ut enim ad minim veniam, quis nostrud exercitation ullamco $x = \frac{ - b \pm \sqrt {b^2 - 4ac} }{2a}$
+                        laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in
+                        voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat
+                        non proident, sunt in culpa qui officia deserunt $f(x) = \int_{-\infty}^\infty\hat f(\xi)\,e^{2 \pi i \xi x}\,d\xi$ mollit anim id est laborum.
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div role="tabpanel" class="tab-pane" id="symbol-support">
+            <div class="row">
+                <div class="latex_container col-md-6">
+                    <span class="render-type-label">KaTeX</span>
+                    <div class="katex_content">
+                        $$\Leftarrow\ \Rightarrow\ \leftrightarrow\ \Leftrightarrow\ \mapsto\ \hookleftarrow$$
+                        $$\leftharpoonup\ \leftharpoondown\ \rightleftharpoons\ \longleftarrow\ \Longleftarrow\ \longrightarrow$$
+                        $$\Longrightarrow\ \longleftrightarrow\ \Longleftrightarrow\ \longmapsto\ \hookrightarrow\ \rightharpoonup$$
+                        $$\rightharpoondown\ \leadsto\ \nearrow\ \searrow\ \swarrow\ \nwarrow$$
+                    </div>
+                </div>
+                <div class="latex_container col-md-6">
+                    <span class="render-type-label">MathJax</span>
+                    <div class="mathjax_content">
+                        $$\Leftarrow\ \Rightarrow\ \leftrightarrow\ \Leftrightarrow\ \mapsto\ \hookleftarrow$$
+                        $$\leftharpoonup\ \leftharpoondown\ \rightleftharpoons\ \longleftarrow\ \Longleftarrow\ \longrightarrow$$
+                        $$\Longrightarrow\ \longleftrightarrow\ \Longleftrightarrow\ \longmapsto\ \hookrightarrow\ \rightharpoonup$$
+                        $$\rightharpoondown\ \leadsto\ \nearrow\ \searrow\ \swarrow\ \nwarrow$$
+                    </div>
+                </div>
+            </div>
+        </div>
         <div role="tabpanel" class="tab-pane" id="pdf-rendering">PDF Rendering SOON TO COME!</div>
     </div>
     <script src="main.js"></script>

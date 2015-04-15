@@ -10,23 +10,22 @@ var Util = {},
         render: {},
         text: "$$r = (variable1_2-variable2_1)\\vec{i}+(y_2-y_1)\\vec{j}+(variable3_2-z_1)\\vec{k}$$" +
               "$$+\\uparrow\\sum F_x=variable4,\\sum F_y=0,\\sum F_z=0$$" +
-              "$$+\\circlearrowright\\sum M_variable5 = 0$$" +
+              "$$+\\circlearrowright\\sum M_{variable5} = 0$$" +
               "$$x = \\frac{ - b \\pm \\sqrt {variable6^2 - 4(variable7)c} }{2a}$$" +
-              "$$f(x) = \\int_{variable8}^variable9\\hat f(\\xi)\\,e^{2 \\pi i \\xi x}\\,d\\xi$$",
+              "$$f(x) = \\int_{variable8}^variable9\\hat f(\\xi)\\,e^{2 \\pi i \\xi x}\\,d\\xi$$" +
+              "$$\\int u \\frac{dv}{variable9}\\,dx=u(variable7)-\\int \\frac{variable3}{dx}v\\,dx$$",
         map: {
             variable1: function () {return Util.rand(0, 300, 1);},
             variable2: function () {return Util.rand(0, 300, 1);},
-            variable3: function () {return Util.rand(0, 300, 1);},
+            variable3: function () {return Util.randStr(['Carbon', 'Petroleum', 'c', 'efghh', 'variableName']);},
             variable4: function () {return Util.rand(0, 300, 1);},
-            variable5: function () {return Util.rand(0, 300, 1);},
+            variable5: function () {return Util.randStr(['Carbon', 'Petroleum', 'c', 'efghh', 'variableName']);},
             variable6: function () {return Util.rand(0, 300, 1);},
-            variable7: function () {return Util.rand(0, 300, 1);},
+            variable7: function () {return Util.randStr(['Carbon', 'Petroleum', 'c', 'efghh', 'variableName']);},
             variable8: function () {return Util.rand(0, 300, 1);},
             variable9: function () {return Util.rand(0, 300, 1);}
         }
     };
-
-
 
 $(function () {
 
@@ -52,8 +51,8 @@ $(function () {
         for (var variable in math.map) {
             str = str.replace(new RegExp(variable, 'g'), math.map[variable]());
         }
-        $mathjax_container.html(str);
-        $katex_container.html(str);
+        $mathjax_container[0].innerHTML = str;
+        $katex_container[0].innerHTML = str;
         math.render.mathjax();
         math.render.katex();
     });
@@ -63,6 +62,10 @@ $(function () {
             range  = (max - domain) / inc,
             num = inc * (Math.ceil(Math.random() * range + domain / inc));
         return num;
+    };
+
+    Util.randStr = function (list) {
+        return list[this.rand(0, list.length - 1, 1)];
     };
 
     math.render = {
@@ -93,5 +96,11 @@ $(function () {
 
     math.render.mathjax();
     math.render.katex();
+
+    math.render.mathjax($mathjax_container[1]);
+    math.render.katex($katex_container[1]);
+
+    math.render.mathjax($mathjax_container[2]);
+    math.render.katex($katex_container[2]);
 
 });
