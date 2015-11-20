@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html>
 <head lang="en">
     <meta charset="UTF-8">
@@ -24,5 +24,136 @@
                 }
         );*/
     </script>
+</body>
+</html> -->
+
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+    <title>HelpTeaching.com</title>
+    <link type="text/css" rel="stylesheet"  href="http://www.helpteaching.com/css/pdfGlobal.css" />
+    <link type="text/css" rel="stylesheet"  href="http://www.helpteaching.com/css/printPreview.css" />
+    <link type="text/css" rel="stylesheet"  href="http://www.helpteaching.com/css/pdf.css" />
+    <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+        asciimath2jax: {
+            delimiters: [['[math]','[/math]']]
+        },
+        messageStyle: 'none',
+        elements: ['content', 'mathSandbox']
+    });
+    MathJax.Hub.Register.StartupHook('AsciiMath Jax Ready', function() {
+        MathJax.InputJax.AsciiMath.AM.define('deg', '\u00B0');
+        MathJax.InputJax.AsciiMath.AM.define('ang', '\u2220');
+        MathJax.InputJax.AsciiMath.AM.define('|-', '\u22a2');
+        MathJax.InputJax.AsciiMath.AM.define('|=', '\u22a8');
+        MathJax.InputJax.AsciiMath.AM.define('|_', '\u230a');
+        MathJax.InputJax.AsciiMath.AM.define('_|', '\u230b');
+    });
+    MathJax.Hub.Register.StartupHook('End', function() {
+        if (window.dojo) {
+            dojo.query('.mathjaxHidden').forEach(function (elem) {
+                dojo.removeClass(elem, 'mathjaxHidden');
+            });
+            dojo.query('.MathJax').parents('.choice').forEach(function (elem) {
+                dojo.addClass(elem, 'hasMath');
+            });
+        } else if (document.querySelector) {
+
+            Array.prototype.slice.call(document.querySelectorAll('.MathJax')).forEach(function (elem) {
+                if (elem.parentNode.classList.contains('choice')) {
+                    elem.parentNode.classList.add('hasMath');
+                }
+            });
+        }
+    });
+    MathJax.InputJax.AsciiMath.postfilterHooks.Add(function (data) {
+        var recur = function (node) {
+            var numChildren = node.childNodes.length;
+            var i, curr;
+            for (i = 0; i < numChildren; i++) {
+                curr = node.childNodes[i];
+                if (curr.nodeName === 'mtable') {
+                    curr.columnalign = 'right';
+                }
+                if (curr.childNodes) {
+                    recur(curr);
+                }
+            }
+        };
+        recur(data.math.root);
+    });
+    MathJax.Hub.msieHTMLCollectionBug = true;
+</script>
+    <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=AM_HTMLorMML-full"></script>
+</head>
+<body>
+<div id="content">
+    <div class="test">
+        <table class="testHeader">
+            <tr>
+                <td>Name: __________________________</td>
+                <td class="headerDate">Date: __________________________</td>
+            </tr>
+        </table>
+        <h2>Calc N&#39; Stuff</h2>
+        <p class="instructions clear">
+            <strong>Instructions:</strong>
+            instructions.
+        </p>
+        <div class="testItems">
+            <div class="questionRow ">
+                <div class="index">1.&nbsp;</div>
+                <div class="questionContent">
+                    [math]cos pi = -1[/math]
+                    <ol class="choices">
+                        <li class="choice ">True</li?
+                        <li class="choice ">False</li>
+                    </ol>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div class="questionRow ">
+                <div class="index">2.&nbsp;</div>
+                <div class="questionContent">
+                    Find the following indefinite integral<br/>[math]int(8x^8 -6) dx[/math]
+                    <ol class="choices">
+                        <li class="choice ">[math]8/9x^9+C[/math]</li>
+                        <li class="choice ">[math]64x^7+c[/math]</li>
+                        <li class="choice ">[math]8/9x^9-6x+C[/math]</li>
+                        <li class="choice ">[math]8/9x^9-6+C[/math]</li>
+                    </ol>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+            <div class="questionRow ">
+                <div class="index">3.&nbsp;</div>
+                <div class="questionContent">
+                    Let [math]f(x)=sqrt(3x^4+5)[/math]. Find [math][/math][math]f'(x)[/math].
+                    <br/><br/><br/><br/><br/>
+                </div>
+                <div class="clear"></div>
+            </div>
+            <div class="clear"></div>
+        </div>
+    </div>
+    <script type="text/javascript">
+        document.addEventListener('DOMContentLoaded', function() {
+            var addClass = function (elements) {
+                Array.prototype.forEach.call(elements, function(el) {
+                    if (el.offsetHeight >= 600) {
+                        el.classList.add('tall');
+                    }
+                });
+            };
+            addClass(document.querySelectorAll('.question'));
+            addClass(document.querySelectorAll('.questionRow'));
+        });
+    </script>
+
+</div>
 </body>
 </html>
