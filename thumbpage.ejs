@@ -1,0 +1,269 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.1//EN" "http://www.w3.org/TR/xhtml11/DTD/xhtml11.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en">
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8"/>
+  <style type="text/css">
+
+    html,body,div,span,applet,object,iframe,h1,h2,h3,h4,h5,h6,p,blockquote,pre,a,abbr,acronym,address,big,cite,code,del,dfn,em,img,ins,
+    kbd,q,s,samp,small,strike,strong,sub,sup,tt,var,dl,dt,dd,ol,ul,li,fieldset,form,label,legend,table,caption,tbody,tfoot,thead,tr,th,td {
+      margin: 0;padding: 0;border: 0;outline: 0;font-weight: inherit;font-style: inherit;
+      font-family: inherit;font-size: 100%;vertical-align: baseline; box-sizing: border-box;}
+    body {color: #000;background: #fff;}
+    ol, ul {list-style: none;}
+    table {border-collapse: separate;  border-spacing: 0;  vertical-align: middle;}
+    caption, th, td {text-align: left;  font-weight: normal;  vertical-align: middle;}
+    a img {border: none;}
+
+    html {
+      /* For wkhtmltopdf */
+      /*zoom: 1.25;*/
+    }
+
+    html > body {
+      font-family: 'Helvetica Neue', Helvetica, Arial, sans-serif;
+      font-size: <%= fontSize %>px;
+      /* For wkhtmltopdf */
+      text-rendering: optimizeLegibility !important;
+      width: <%= width %>px;
+      line-height: 26px;
+      letter-spacing: 0.3px;
+    }
+
+    .bs-mathjax,
+    .variable-container,
+    .figure-box  {
+      border-radius: 5px;
+      margin: 0;
+      border: 0;
+      padding: 0;
+      display: inline-block;
+      background: transparent;
+      line-height: inherit;
+      font-size: inherit;
+      font-family: inherit;
+      outline: 0;
+    }
+
+    .figure-box .variable-container,
+    .figure-box .mathjax-render-zone {
+      display: inline;
+      position: static;
+    }
+
+    foreignObject,
+    .lab,
+    .optimization-label {
+      font-size: <%= labelFontSize %>
+    }
+
+    .figure-box {
+      display: block;
+      margin: 10px auto;
+    }
+    .figure-box img {
+      width: 100%;
+    }
+    .bs-mathjax {
+      margin-top: 5px;
+      margin-bottom: 5px;
+    }
+
+    .paper-header-items ul,
+    .assignment-collection > li,
+    p {
+      list-style: none;
+      margin: 0;
+      padding: 0;
+    }
+
+    .clearfix:after {
+      content: "";
+      display: block;
+      clear: both;
+    }
+
+    .paper-dimension {
+      /*min-height: 9.5in;*/
+      min-height: 8.5in;
+      /*width: 6.9in;*/
+      word-wrap: break-word;
+    }
+
+    .paper-header-title {
+      font-size: 28px;
+    }
+
+    .paper-header-logo {
+      margin: 0;
+      display: block;
+      height: 80px;
+      margin-bottom: 20px;
+    }
+
+    .paper-header-logo > img {
+      height: 100%;
+    }
+
+    .paper-header-items li {
+      margin-bottom: 10px;
+      font-weight: bold;
+    }
+
+    .question-prefix {
+      /*margin-right: 10px;*/
+      width: 70px;
+      float: left;
+      font-weight: 700;
+    }
+
+    .paper-header {
+      margin-bottom: 20px;
+      position: relative;
+    }
+
+    .paper-extra-info {
+    }
+
+    .paper-disclaimer {
+      padding: 10px 25px;
+    }
+
+    .paper-header:after, .paper-student-item:after, .paper-extra-info:before {
+      display: block;
+      content: "";
+      position: absolute;
+      left: 0;
+      right: 0;
+      height: 1px;
+      background-color: #999;
+    }
+
+    .rightAsst {
+      float: right;
+      width: 280px;
+    }
+
+    .leftAsst {
+      float: left;
+      width: 430px;
+    }
+
+    .paper-student-item {
+      position: relative;
+    }
+
+    .assignment-collection > li {
+      padding: 15px;
+    }
+
+  </style>
+  <link rel="stylesheet" href="variable-inserter.css.css" />
+  <script type="text/x-mathjax-config">
+    MathJax.Hub.Config({
+      showProcessingMessages: false,
+      showMathMenu: false,
+      tex2jax: {
+        inlineMath: [["$","$"],["\\(","\\)"]],
+        skipTags: ["variable", "script"]
+      },
+      SVG: {
+        blacker: 0
+      },
+      TeX: {
+
+      }
+    });
+
+    MathJax.Hub.Register.PreProcessor(function() {
+      console.log('ready to run MathJax');
+    });
+
+    MathJax.Hub.Queue(function () {
+      console.log('Typesetting Complete');
+    });
+    </script>
+  <script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG-full"></script>
+  <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+</head>
+<body>
+
+<!-- IMPORTANT! this is how we inject the content to be rendered in -->
+<%= html %><br><br>
+
+<div style="text-align: left;"><span style="font-size: 14px;">Force <button class="mathjax-render-zone mainMain bs-mathjax" contenteditable="false"><script type="text/mathjax-placeholder" class="mathjax-placeholder">\vec{F<span>}</span></script></button>&nbsp;</span><span style="font-size: 14px;">acts at the end of the angle bracket shown below and has a magnitude of </span><button class="variable-container mainMain finished variable1440190195879" tabindex="-1">force</button><span style="font-size: 14px;">&nbsp;N. Determine the amount of of the force about point </span><i style="font-family: inherit; font-weight: inherit;">O.&nbsp;</i></div><div style="text-align: left;"><i style="font-family: inherit; font-weight: inherit;"><div class="space"></div><button class="figure-box filled" contenteditable="false" data-figure-type="svg" style="height: 389.333px; width: 384.532px;"><svg class="varafy_leonardo" viewBox="-121.23040209219474 -178.730938227433 384.5319965288136 389.3333333333336" width="100%" height="100%"><defs><marker id="vector_1443800291189_7-marker-end-18" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6" data-name="arrow"> <polygon points="0,0 10,5 0,10 1,5" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0);"></polygon> </marker></defs><polygon class="rtri" style="fill: rgb(255, 255, 255); stroke: rgb(158, 115, 45); stroke-width: 8px; cursor: default; opacity: 1;" points="73.13065426567846,-118.22666472316003 73.13065426567849,57.77333527684057 -96.52746539244205,57.7733352768406" transform="rotate(89.99999999999994,-11.698405563381783,-30.226664723159715)" data-shape-id="rtri_1443800222653_6" data-snap=""></polygon><line class="line" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 4px; cursor: default; opacity: 1;" subtype="vector" x1="76.30159443661856" y1="54.60239510590049" x2="162.3015944366188" y2="140.60239510590094" transform="rotate(0,119.30159443661869,97.60239510590071)" data-shape-id="vector_1443800291189_7" marker-end="url(#vector_1443800291189_7-marker-end-18)" data-snap="START:rtri_1443800222653_6:TR"></line><line class="line" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 1px; cursor: default; stroke-dasharray: 5px, 5px; opacity: 1;" x1="76.3015944366182" y1="54.602395105900484" x2="76.3015944366182" y2="210.6023951059006" transform="rotate(0,76.3015944366182,132.60239510590054)" data-shape-id="line_1443800301638_8" data-snap="START:rtri_1443800222653_6:TR;START:vector_1443800291189_7:START"></line><foreignObject __children="[object Object]" class="lab" x="-121.23040209219474" y="-146.06609437514138" width="59.90095765527474" height="25.313245265220345" transform="rotate(0,-91.27992326455737,-133.4094717425312)" data-shape-id="lab_1443800341480_9" style="cursor: default; opacity: 1;" data-resized="true"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false">&nbsp; O</div></foreignObject><foreignObject __children="[object Object]" class="lab" x="162.3015944366188" y="115.60239510590095" width="101" height="24.999999999999986" transform="rotate(0,212.8015944366188,128.10239510590094)" data-shape-id="lab_1443800387333_10" style="cursor: default; opacity: 1;" data-resized="false" data-snap="BL:vector_1443800291189_7:END"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class=""><button class="mathjax-render-zone bs-mathjax" contenteditable="false"><script type="text/mathjax-placeholder" class="mathjax-placeholder">\,\,|\vec{F}| =&nbsp;<button class="variable-container variable1440190195879 finished" tabindex="-1" data-suffix="latex" contenteditable="false">force</button>&nbsp;\,\text{N}</script></button></div></foreignObject><line class="line" style="fill: rgb(211, 211, 211); stroke: rgb(127, 124, 119); stroke-width: 6px; cursor: default;" x1="-99.69840556338193" y1="-178.730938227433" x2="-99.69840556338193" y2="138.7904292939349" transform="rotate(0,-99.69840556338193,-19.970254466749054)" data-shape-id="line_1443800218309_5" data-snap=""></line><g class="dim_distance_274" data-one="rtri_1443800222653_6-BL" data-two="rtri_1443800222653_6-BR" data-anchor-one="BL" data-anchor-two="BR" data-type="distance" data-value-scale="1" data-constrained="true"><line data-bound="1" style="stroke: black; stroke-width: 2px;" data-parent="BL" stroke="black" x1="-99.69840556338217" y1="-115.05572455221987" x2="177.92448167025884" y2="-115.05572455222016"></line><line data-bound="2" style="stroke: black; stroke-width: 2px;" data-parent="BR" stroke="black" x1="-99.698405563382" y1="54.60239510590067" x2="177.924481670259" y2="54.602395105900385"></line><line data-bound="1" marker-end="url(#freedimarrow)" style="fill: rgb(127,0,0); stroke: black; stroke-width: 1px" stroke="black" x1="177.9244816702589" y1="-42.726664723159885" x2="177.92448167025884" y2="-115.05572455222016"></line><line data-bound="2" marker-end="url(#freedimarrow)" style="fill: rgb(127,0,0); stroke: black; stroke-width: 1px" stroke="black" x1="177.92448167025893" y1="-17.726664723159885" x2="177.924481670259" y2="54.602395105900385"></line><path data-label-arc="true" stroke="black" style="fill: none; stroke: black; stroke-width: 1px; display: none;"></path><foreignObject apply-default-style="false" x="152.9244816702589" y="-42.726664723159885" width="50" height="25" style="-webkit-user-select: none;-ms-user-select: none;-moz-user-select: none;user-select: none;cursor: pointer;"><div style="text-align: center; color: black; line-height: 22px; width: 100%; height: 100%; border-width: 1px;" class="optimization-label" contenteditable="true"><button class="variable-container variable1440190255880 finished" tabindex="-1" contenteditable="false">h</button></div></foreignObject></g><g class="dim_distance_276" data-one="rtri_1443800222653_6-BR" data-two="rtri_1443800222653_6-TR" data-anchor-one="BR" data-anchor-two="TR" data-type="distance" data-value-scale="1" data-constrained="true"><line data-bound="1" style="stroke: black; stroke-width: 2px;" data-parent="BR" stroke="black" x1="-99.698405563382" y1="54.60239510590067" x2="-99.69840556338194" y2="98.8929933965005"></line><line data-bound="2" style="stroke: black; stroke-width: 2px;" data-parent="TR" stroke="black" x1="76.30159443661863" y1="54.60239510590047" x2="76.30159443661869" y2="98.8929933965003"></line><line data-bound="1" marker-end="url(#freedimarrow)" style="fill: rgb(127,0,0); stroke: black; stroke-width: 1px" stroke="black" x1="-36.69840556338163" y1="98.89299339650043" x2="-99.69840556338194" y2="98.8929933965005"></line><line data-bound="2" marker-end="url(#freedimarrow)" style="fill: rgb(127,0,0); stroke: black; stroke-width: 1px" stroke="black" x1="13.301594436618373" y1="98.89299339650037" x2="76.30159443661869" y2="98.8929933965003"></line><path data-label-arc="true" stroke="black" style="fill: none; stroke: black; stroke-width: 1px; display: none;"></path><foreignObject apply-default-style="false" x="-36.69840556338163" y="86.3929933965004" width="50" height="25" style="-webkit-user-select: none;-ms-user-select: none;-moz-user-select: none;user-select: none;cursor: pointer;"><div style="text-align: center; color: black; line-height: 22px; width: 100%; height: 100%; border-width: 1px;" class="optimization-label" contenteditable="true"><button class="variable-container variable1440190213965 finished" tabindex="-1" contenteditable="false">l</button></div></foreignObject></g><g class="dim_angle_1287" data-type="angle" data-one="line_1443800301638_8-START-END-END-76,124" data-two="vector_1443800291189_7-START-END-END-111,90" data-angle-type="value" data-clockwise="false" data-constrained="true"><circle cx="76.3015944366182" cy="54.602395105900136" r="8" fill="black" stroke="black" stroke-width="0.5px" style="display: none;"></circle><line data-intersection="1" data-parent="START-END" x1="76.3015944366182" y1="54.602395105900136" x2="76.3015944366182" y2="54.602395105900484" stroke-dasharray="5,5" stroke-width="2" stroke="black" style="display: none;"></line><line data-intersection="2" data-parent="START-END" x1="76.3015944366182" y1="54.602395105900136" x2="76.30159443661856" y2="54.60239510590049" stroke-dasharray="5,5" stroke-width="2" stroke="black" style="display: none;"></line><path fill="none" stroke="black" stroke-width="1" marker-end="url(#freedimarrow)" marker-start="url(#freedimarrow-rev)" d="M76.3015944366182,153.49917480169702 A98.8967796957969,98.8967796957969,0, 0,0,89.14775354045983,152.6613020469719M135.96983995899726,133.47110569812472 A98.8967796957969,98.8967796957969,0, 0,0,146.2321779970282,124.53297866631027" display="block"></path><line data-projection="1" x1="76.3015944366182" y1="210.6023951059006" x2="76.3015944366182" y2="133.49917480169702" stroke-dasharray="5,5" stroke-width="1" stroke="black" style="display: none;"></line><line data-projection="2" x1="162.3015944366188" y1="140.60239510590094" x2="132.09004237329728" y2="110.39084304257929" stroke-dasharray="5,5" stroke-width="1" stroke="black" style="display: none;"></line><path data-label-arc="true" fill="none" stroke="black" stroke-width="1" style="display: none;" d="M 26.30159443661819 127.11514092902132 Q 90.0546532180222 195.582632764297 102.72610789271954 135.40407851036224" marker-end="url(#freedimarrow)"></path><foreignObject x="89.14775354045983" y="133.4711056981247" width="50" height="25" stroke-dasharray="none"><div style="text-align: center; color: black; line-height: 22px; width: 100%; height: 100%;" class="optimization-label" contenteditable="false"><button class="variable-container variable1440190265392 finished" tabindex="-1" contenteditable="false">angle</button></div></foreignObject></g></svg></button><div class="space"></div></i></div><div><br></div><div><div><i><br></i></div><div><i><div class="space"><br></div></i></div></div>
+
+$ \theta + \beta = 90^\circ $
+
+<svg width="0" height="0" style="position: absolute;">
+  <defs id="leo-core-definitions">
+    <marker id="arrow" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6">
+      <polygon points="0,0 10,5 0,10 1,5" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0);"></polygon>
+    </marker>
+    <marker id="arrow-rev" viewBox="0 0 10 10" refX="0" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6">
+      <polygon points="10,0 0,5 10,10 9,5" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0);"></polygon>
+    </marker>
+
+    <marker id="arrow-flat" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6">
+      <!--<polygon points="0,0 10,5 0,10 1,5" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0);"></polygon>-->
+      <line x1="0" x2="10" y1="0" y2="5" style="stroke: rgb(0, 0, 0); stroke-width: 2;"></line>
+      <line x1="0" x2="10" y1="10" y2="5" style="stroke: rgb(0, 0, 0); stroke-width: 2;"></line>
+    </marker>
+    <marker id="arrow-flat-rev" viewBox="0 0 10 10" refX="0" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6">
+      <!--<polygon points="10,0 0,5 10,10 9,5" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0);"></polygon>-->
+      <line x1="0" x2="10" y1="5" y2="0" style="stroke: rgb(0, 0, 0); stroke-width: 2;"></line>
+      <line x1="0" x2="10" y1="5" y2="10" style="stroke: rgb(0, 0, 0); stroke-width: 2;"></line>
+    </marker>
+
+    <marker id="arrow-skinny" viewBox="0 0 10 8" refX="9" refY="4" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6">
+      <polygon points="0,0 10,4 0,8 4,4" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0);"></polygon>
+    </marker>
+    <marker id="arrow-skinny-rev" viewBox="0 0 10 8" refX="0" refY="4" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6">
+      <polygon points="10,0 0,4 10,8 6,4" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0);"></polygon>
+    </marker>
+
+    <marker id="freedimarrow" viewBox="0 0 18 10" refX="18" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="18" markerHeight="6">
+      <polygon points="0,0 18,5 0,10 6,5" style="fill: black;"></polygon>
+    </marker>
+    <marker id="freedimarrow-rev" viewBox="0 0 18 10" refX="0" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="18" markerHeight="6">
+      <polygon points="18,0 0,5 18,10 12,5" style="fill: black;"></polygon>
+    </marker>
+
+    <marker id="validconstraintdimarrow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6">
+      <polygon points="0,0 10,5 0,10 1,5" style="fill: maroon;"></polygon>
+    </marker>
+    <marker id="invalidconstraintdimarrow" viewBox="0 0 10 10" refX="10" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6">
+      <polygon points="0,0 10,5 0,10 1,5" style="fill: darkgrey;"></polygon>
+    </marker>
+    <pattern id="wall-support" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse">
+      <line x1="0" y1="0" x2="15" y2="15" stroke="black" stroke-width="0.5"></line>
+    </pattern>
+  </defs>
+</svg>
+
+<script type="text/javascript" src="html_latex.js"></script>
+<script>
+  $(function() {
+    // console.log(window.HtmlToLatex);
+    var $variableContainers = $('button.mathjax-render-zone');
+    $variableContainers.each(function() {
+      var $this = $(this);
+      //console.log($this);
+      $this.replaceWith(function() {
+        var mathjaxScriptTagHtml = $this.children('script.mathjax-placeholder')[0].innerHTML;
+        //console.log(mathjaxScriptTagHtml);
+
+        var returnStr = window.HtmlToLatex.parseMathjaxInput(mathjaxScriptTagHtml);
+
+        var string;
+        returnStr.done(function(html) {
+          string = html;
+        });
+        //console.log(string);
+        return '$' + string + '$';
+      });
+    });
+  });
+</script>
+
+</body>
+</html>

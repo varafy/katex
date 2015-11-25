@@ -1,0 +1,12 @@
+{
+  "name": "varafy_katex",
+  "author": "Justin Sharp <jsharp@varafy.com>",
+  "engines": {
+    "node": "~5.0.0",
+    "npm": "~3.3.6"
+  },
+  "dependencies": {
+    "ejs": "^2.3.4",
+    "phantomjs": "1.9.2-2"
+  }
+}
