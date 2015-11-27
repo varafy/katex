@@ -94,7 +94,10 @@ $(function() {
 
   console.log(HtmlToLatex);
   var $variableContainers = $('.mathjax-render-zone');
-  $variableContainers.html(function() {
+  var deferredArr = [];
+  $variableContainers.each(function() {
+    var deferred = $.Deferred();
+    var _this = this;
     var $this = $(this);
     if (!$this.children('script.mathjax-placeholder')[0]) {
       console.log($this[0]);
@@ -108,12 +111,16 @@ $(function() {
     returnStr.done(function(html) {
       string = html;
     });
-    return '$\\displaystyle{' + string + '}$';
-  }).each(function(){
-    MathJax.Hub.Queue(["Typeset", MathJax.Hub, this]);
-  });
+    var latex = '$\\displaystyle{' + string + '}$';
+    MathJax.Hub.Typeset(_this, function() {
+      var jax = MathJax.Hub.getAllJax(_this)[0];
+      jax.Text(latex, function() {
+        deferred.resolve();
+      });
+    });
+  })
 
-  MathJax.Hub.Queue(function() {
+  $.when.apply($, deferredArr).done(function(){
     window.allDone = 1;
   });
 });

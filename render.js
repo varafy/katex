@@ -94,17 +94,19 @@ multipleIncludeJs([JQueryJS, MathJaxJS], function() {
   });
 
   if (allDone) {
-    console.log('No MathJax');
+    console.log('window.MathJax does not exist.');
     console.log('Content.length:', page.content && page.content.length);
     renderThumbnail();
   } else {
-    console.log('Yes MathJax');
+    var time = performance.now();
+    console.log('window.MathJax does exists.');
+    console.log('Started Rendering...');
     interval = setInterval(function () {
       var allDone = page.evaluate(function () {
         return window.allDone;
       });
 
-      console.log(allDone ? '::finished' : '::rendering');
+      console.log(allDone ? '::finished' : '::rendering', '-', (performance.now() - time).toFixed(2), 'ms');
 
       if (allDone) {
         clearInterval(interval);
