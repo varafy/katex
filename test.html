@@ -180,8 +180,186 @@
             padding: 15px;
         }
 
+        .unselectable {
+  user-select: none;
+}
+.variable-inserter {
+  position: absolute;
+  display: inline-block;
+  z-index: 1051;
+}
+.var-input {
+  padding: 1px 4px;
+  min-height: 1em;
+  color: #31708f;
+  background-color: #f0f8ff;
+  border: 1px solid #31708f;
+  border-radius: 5px;
+  box-shadow: 2px 2px 2px rgba(0,0,0,0.133);
+  display: inline-block;
+  font-family: Consolas, "Courier New", monospace;
+}
+.var-input-options {
+  position: absolute;
+  left: 100%;
+  top: 0;
+  display: block;
+  width: 200px;
+}
+.var-list-container {
+  display: block;
+  position: absolute;
+  top: 100%;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 130px;
+  border-radius: 5px;
+  max-height: 200px;
+  overflow: auto;
+}
+.var-list-container .variable-container {
+  background: transparent;
+}
+.var-list-container .var-list {
+  position: relative;
+  top: 0;
+  margin: 0;
+}
+.var-list-container .var-list > li {
+  padding: 4px 8px;
+}
+.var-list-container .var-list > li .custom-icon {
+  display: block;
+  float: left;
+  width: 35px;
+  color: #888;
+}
+.var-list-container .var-list > li b {
+  color: inherit;
+}
+.var-list-container .var-list > li.active {
+  color: #fff;
+}
+.var-list-container .var-list > li.active b {
+  color: #fff;
+}
+.var-list-container .var-list > li.active .variable-container {
+  color: #fff;
+  background: transparent;
+}
+.var-list-container .var-list > li.active .custom-icon {
+  color: #ddd;
+}
+.var-list-container.flipped {
+  top: auto;
+  bottom: 100%;
+}
+variable,
+.variable-container {
+  font-family: Consolas, "Courier New", monospace !important;
+  color: #31708f;
+  fill: #31708f;
+  cursor: pointer;
+  padding: 0;
+  background: #f0f8ff;
+  border: 1px solid transparent;
+  border: 0;
+  text-shadow: 2px 2px transparent;
+  border-radius: 5px;
+  opacity: 0;
+  min-height: 1.4em;
+  transition: color 0.1s;
+}
+variable:hover,
+.variable-container:hover {
+  color: #6a3;
+}
+variable.highlight,
+.variable-container.highlight {
+  color: #f0f8ff;
+  background: #31708f;
+}
+variable.errored,
+.variable-container.errored,
+variable.broken,
+.variable-container.broken {
+  color: #f00;
+  fill: #f00;
+  background: #ffd9e2;
+  border-color: transparent;
+  text-shadow: 2px 2px transparent;
+}
+variable.errored:hover,
+.variable-container.errored:hover,
+variable.broken:hover,
+.variable-container.broken:hover {
+  color: #a63;
+}
+variable.errored.highlight,
+.variable-container.errored.highlight,
+variable.broken.highlight,
+.variable-container.broken.highlight {
+  background: #f00;
+  color: #ffd9e2;
+}
+variable.finished,
+.variable-container.finished {
+  opacity: 1;
+}
+.MathJax variable,
+.MathJax .variable-container {
+  border: 1px solid transparent;
+  font-size: 0.875em;
+  border: 0;
+  padding: 0;
+}
+.MathJax variable:hover,
+.MathJax .variable-container:hover {
+  color: #31708f;
+}
+.MathJax variable.broken,
+.MathJax .variable-container.broken {
+  border-color: transparent;
+}
+.MathJax variable.broken:hover,
+.MathJax .variable-container.broken:hover {
+  color: #f00;
+}
+.preview-item-content variable,
+.preview-item-content .variable-container {
+  border: 0;
+  background: transparent;
+  padding: 0;
+  color: inherit;
+  cusor: inherit;
+  opacity: 1;
+  text-shadow: none;
+}
+#navigation-app variable:hover,
+#navigation-app .variable-container:hover,
+.preview-item-content variable:hover,
+.preview-item-content .variable-container:hover,
+#navigation-app variable.broken:hover,
+#navigation-app .variable-container.broken:hover,
+.preview-item-content variable.broken:hover,
+.preview-item-content .variable-container.broken:hover {
+  color: inherit;
+}
+.variable-container-value {
+  border-radius: 5px;
+}
+.variable-container-value.error {
+  color: #f00;
+}
+.variable-container-value.highlight {
+  color: #08f;
+}
+.variable-container-value.lock {
+  background-color: #fafad2;
+}
+
+
     </style>
-    <link rel="stylesheet" href="variable-inserter.css.css" />
     <script type="text/x-mathjax-config">
     MathJax.Hub.Config({
       showProcessingMessages: false,
@@ -277,7 +455,7 @@
     </div>
 </div>-->
 
-<!--<div style="text-align: left;"><span style="font-size: 14px;">Thumbnail Render Testing</span></div><div style="text-align: left;"><span style="font-size: 14px;"><br></span></div><div style="text-align: center;"><span style="font-size: 14px;">Centered</span></div><div style="text-align: center;"><span style="font-size: 14px;"><br></span></div><div style="text-align: right;"><span style="">Right</span></div><div style="text-align: left;"><ul><li>1</li><li>2</li></ul><ol><li>3</li><li>4</li></ol><ul><li>5</li></ul><div><br></div><div><button class="mathjax-render-zone bs-mathjax" contenteditable="false"><script type="text/mathjax-placeholder" class="mathjax-placeholder">ax^2 + bx + c +&nbsp;<button class="variable-container variable1448494125305 finished" tabindex="-1" data-suffix="latex" data-unit-rounding="" contenteditable="false">foo</button>&nbsp;+&nbsp;<button class="variable-container variable1448494130185 finished" tabindex="-1" data-suffix="latex" data-unit-rounding="" contenteditable="false">foobar</button>&nbsp;= \left[ \begin{matrix} a &amp; b \\ c &amp; d \end{matrix} \right]</script></button><br></div><div><br></div><div><button class="mathjax-render-zone mainMain bs-mathjax" contenteditable="false"><script type="text/mathjax-placeholder" class="mathjax-placeholder">\int_{a}^{b}f(x)dx</script></button><br></div><div><div class="space"></div><button class="figure-box filled" contenteditable="false" data-figure-type="svg" style="height: 417.689px; width: 590.39px;"><svg class="varafy_leonardo" viewBox="-234.3281284066029 -205.1463587821305 590.389537082125 417.68867924528286" width="100%" height="100%"><defs><marker id="vector_1448493635092_2-marker-end-3" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6" data-name="arrow"> <polygon points="0,0 10,5 0,10 1,5" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0);"></polygon> </marker><pattern id="DetailedPin_1448493738946_6-c1-fill-3" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse" data-name="wall-support"> <line x1="0" y1="0" x2="15" y2="15" stroke="black" stroke-width="0.5"></line> </pattern><pattern id="WallSupport_1448493755860_8-c1-fill-3" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse" data-name="wall-support"> <line x1="0" y1="0" x2="15" y2="15" stroke="black" stroke-width="0.5"></line> </pattern></defs><path class="arc" d="M 133.61213604317606 -96.02456530190894 A 191.03519117575826 83.6950405793511 0 1 0 241.58363276278845 35.791500575178745" style="stroke: rgb(0, 0, 0); stroke-width: 2px; fill: none; cursor: default;" data-shape-id="arc_1448493614866_0" transform="rotate(0,-29.801872438720352,-60.37083093508832)"></path><circle class="circle" cx="89.110265027628" cy="-14.632106406331161" r="80.9197132965756" style="fill: rgb(46, 157, 251); stroke: rgb(243, 0, 0); stroke-width: 2px; cursor: default;" no-centroid="true" transform="rotate(0,89.110265027628,-14.632106406331161)" data-shape-id="circle_1448493620996_1" data-snap="M:arc_1448493614866_0:C;M:vector_1448493635092_2:START!END:-180.0161164286049,-50.17688848536967"></circle><line class="line" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 3px; cursor: default;" subtype="vector" x1="259.0614086755221" y1="63.08617384280407" x2="133.61213604317606" y2="-96.02456530190895" transform="rotate(0,196.33677235934908,-16.46919572955244)" data-shape-id="vector_1448493635092_2" marker-end="url(#vector_1448493635092_2-marker-end-3)" data-snap="END:arc_1448493614866_0:P1"></line><foreignObject class="lab" x="133.61213604317606" y="-168.02456530190886" width="183" height="72" transform="rotate(0,225.11213604317606,-132.02456530190886)" data-shape-id="lab_1448493657773_3" style="cursor: default;" data-resized="false" data-snap="BL:arc_1448493614866_0:P1;BL:vector_1448493635092_2:END"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class=""><button class="mathjax-render-zone bs-mathjax" contenteditable="false"><script type="text/mathjax-placeholder" class="mathjax-placeholder">\vec{A} \times \vec{B} = \left| \begin{matrix} \vec{i} &amp; \vec{j} &amp; \vec{k} \\ A_x &amp; A_y &amp; A_z \\ B_x &amp; B_y &amp; B_z \end{matrix} \right|</script></button></div></foreignObject><foreignObject class="lab" x="222.97479003876336" y="4.731701945154718" width="30" height="24.99999999999985" transform="rotate(0,237.97479003876336,17.231701945154644)" data-shape-id="lab_1448493691609_4" style="cursor: default;" data-resized="false" data-snap="BL:vector_1448493635092_2:START!END:-36.08661863675874,-33.35447189764953"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class=""><button class="variable-container variable1448493695970 finished" tabindex="-1" data-suffix="text" data-unit-rounding="" contenteditable="false">foo</button></div></foreignObject><foreignObject class="lab" x="259.0614086755221" y="63.0861738428041" width="97" height="25.000000000000185" transform="rotate(0,307.5614086755221,75.58617384280419)" data-shape-id="lab_1448493705280_5" data-resized="false" style="cursor: default;" data-snap="TL:vector_1448493635092_2:START"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class=""><button class="variable-container variable1448493709648 finished" tabindex="-1" data-suffix="text" data-unit-rounding="" contenteditable="false">longvarname</button></div></foreignObject><g class="group-DetailedPin" children="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" width="50" height="60" no-box-points="true" no-centroid="true" transform="rotate(0,-186.0907969195183,-14.58975500854558)" data-shape-id="DetailedPin_1448493738946_6" style="cursor: default;"><line x1="-211.0907969195183" y1="-9.58975500854558" x2="-161.0907969195183" y2="-9.58975500854558" style="stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-186.0907969195183,-9.58975500854558)"></line><rect x="-211.0907969195183" y="-9.58975500854558" width="50" height="25" fill="url(#DetailedPin_1448493738946_6-c1-fill-3)" transform="rotate(0,-186.0907969195183,2.9102449914544195)"></rect><path d="M -198.53 -32.05 L -198.53 -9.55 L -173.53 -9.55 L -173.53 -32.05" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;"></path><path d="M -198.53 -32.05 A 12.5 12.5 0 0 1 -173.53 -32.05" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-186.0907969195183,-38.339755008545595)"></path><rect x="-211.0907969195183" y="-14.58975500854558" width="50" height="5" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-186.0907969195183,-12.08975500854558)"></rect><rect x="-208.5907969195183" y="-17.08975500854558" width="5" height="5" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-206.0907969195183,-14.58975500854558)"></rect><rect x="-168.5907969195183" y="-17.08975500854558" width="5" height="5" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-166.0907969195183,-14.58975500854558)"></rect><circle r="2" cx="-186.0907969195183" cy="-34.589755008545595" data-ignore-style="true" style="fill: rgb(100, 100, 100); stroke: rgb(0, 0, 0); stroke-width: 0.5px;" transform="rotate(0,-186.0907969195183,-34.589755008545595)"></circle></g><g class="group-Beam" children="[object Object],[object Object],[object Object]" beam-height="40" beam-padding="0" transform="rotate(0,-87.60023088178251,129.99515065183166)" data-shape-id="Beam_1448493753693_7" style="cursor: default;"><rect x="-185.24174031574475" y="109.99515065183171" width="195.28301886792448" height="39.99999999999993" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-87.60023088178251,129.99515065183166)"></rect><line x1="-185.24174031574475" y1="114.99515065183182" x2="10.041278552179733" y2="114.99515065183182" style="stroke: rgb(50, 50, 50); stroke-width: 1px;" transform="rotate(0,-87.60023088178251,114.99515065183182)"></line><line x1="-185.24174031574475" y1="144.9951506518317" x2="10.041278552179733" y2="144.9951506518317" style="stroke: rgb(50, 50, 50); stroke-width: 1px;" transform="rotate(0,-87.60023088178251,144.9951506518317)"></line></g><g class="group-WallSupport" children="[object Object],[object Object]" wall-depth="25" no-box-points="true" no-centroid="true" transform="rotate(179.99999999999986,22.541278552179556,129.99515065183164)" data-shape-id="WallSupport_1448493755860_8" style="cursor: default;" data-snap="gR:Beam_1448493753693_7:gEND"><line x1="35.04127855217962" y1="47.44798084051099" x2="35.04127855217962" y2="212.5423204631523" style="stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,35.04127855217962,129.99515065183164)"></line><rect x="10.041278552179499" y="47.44798084051099" width="25.000000000000085" height="165.09433962264131" fill="url(#WallSupport_1448493755860_8-c1-fill-3)" transform="rotate(0,22.54127855217954,129.99515065183164)"></rect></g><foreignObject class="lab" x="-210.24174031574478" y="-205.1463587821305" width="30" height="25" transform="rotate(0,-195.24174031574478,-192.6463587821305)" data-shape-id="lab_1448493765175_9" style="cursor: default;" data-resized="false"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class="active"><button class="mathjax-render-zone bs-mathjax" contenteditable="false"><span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-93-Frame" role="math" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0ex" height="0.138ex" viewBox="0 -16.8 0 33.6" style="vertical-align: -0.138ex; margin: 1px 0ex;"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"></g></svg></span></button></div></foreignObject><foreignObject class="lab" x="-234.3281284066029" y="-160.36132803155283" width="92" height="66.00000000000001" transform="rotate(0,-188.3281284066029,-127.36132803155283)" data-shape-id="lab_1448493803628_12" style="cursor: default;" data-resized="false"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class=""><button class="mathjax-render-zone bs-mathjax" contenteditable="false"><script type="text/mathjax-placeholder" class="mathjax-placeholder">\left[ \begin{matrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{matrix} \right]</script></button></div></foreignObject></svg></button><div class="space"></div><div class="space"><b><u><strike>asdasdasd blah blahg</strike> asdkfask;lfdj<i> ;asjd;lasjdl&nbsp;</i></u></b></div><br></div></div><div style="text-align: left;"><br></div>-->
+<div style="text-align: left;"><span style="font-size: 14px;">Thumbnail Render Testing</span></div><div style="text-align: left;"><span style="font-size: 14px;"><br></span></div><div style="text-align: center;"><span style="font-size: 14px;">Centered</span></div><div style="text-align: center;"><span style="font-size: 14px;"><br></span></div><div style="text-align: right;"><span style="">Right</span></div><div style="text-align: left;"><ul><li>1</li><li>2</li></ul><ol><li>3</li><li>4</li></ol><ul><li>5</li></ul><div><br></div><div><button class="mathjax-render-zone bs-mathjax" contenteditable="false"><script type="text/mathjax-placeholder" class="mathjax-placeholder">ax^2 + bx + c +&nbsp;<button class="variable-container variable1448494125305 finished" tabindex="-1" data-suffix="latex" data-unit-rounding="" contenteditable="false">foo</button>&nbsp;+&nbsp;<button class="variable-container variable1448494130185 finished" tabindex="-1" data-suffix="latex" data-unit-rounding="" contenteditable="false">foobar</button>&nbsp;= \left[ \begin{matrix} a &amp; b \\ c &amp; d \end{matrix} \right]</script></button><br></div><div><br></div><div><button class="mathjax-render-zone mainMain bs-mathjax" contenteditable="false"><script type="text/mathjax-placeholder" class="mathjax-placeholder">\int_{a}^{b}f(x)dx</script></button><br></div><div><div class="space"></div><button class="figure-box filled" contenteditable="false" data-figure-type="svg" style="height: 417.689px; width: 590.39px;"><svg class="varafy_leonardo" viewBox="-234.3281284066029 -205.1463587821305 590.389537082125 417.68867924528286" width="100%" height="100%"><defs><marker id="vector_1448493635092_2-marker-end-3" viewBox="0 0 10 10" refX="9" refY="5" markerUnits="strokeWidth" orient="auto" markerWidth="5" markerHeight="6" data-name="arrow"> <polygon points="0,0 10,5 0,10 1,5" style="fill: rgb(0, 0, 0); stroke: rgb(0, 0, 0);"></polygon> </marker><pattern id="DetailedPin_1448493738946_6-c1-fill-3" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse" data-name="wall-support"> <line x1="0" y1="0" x2="15" y2="15" stroke="black" stroke-width="0.5"></line> </pattern><pattern id="WallSupport_1448493755860_8-c1-fill-3" x="0" y="0" width="15" height="15" patternUnits="userSpaceOnUse" data-name="wall-support"> <line x1="0" y1="0" x2="15" y2="15" stroke="black" stroke-width="0.5"></line> </pattern></defs><path class="arc" d="M 133.61213604317606 -96.02456530190894 A 191.03519117575826 83.6950405793511 0 1 0 241.58363276278845 35.791500575178745" style="stroke: rgb(0, 0, 0); stroke-width: 2px; fill: none; cursor: default;" data-shape-id="arc_1448493614866_0" transform="rotate(0,-29.801872438720352,-60.37083093508832)"></path><circle class="circle" cx="89.110265027628" cy="-14.632106406331161" r="80.9197132965756" style="fill: rgb(46, 157, 251); stroke: rgb(243, 0, 0); stroke-width: 2px; cursor: default;" no-centroid="true" transform="rotate(0,89.110265027628,-14.632106406331161)" data-shape-id="circle_1448493620996_1" data-snap="M:arc_1448493614866_0:C;M:vector_1448493635092_2:START!END:-180.0161164286049,-50.17688848536967"></circle><line class="line" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 3px; cursor: default;" subtype="vector" x1="259.0614086755221" y1="63.08617384280407" x2="133.61213604317606" y2="-96.02456530190895" transform="rotate(0,196.33677235934908,-16.46919572955244)" data-shape-id="vector_1448493635092_2" marker-end="url(#vector_1448493635092_2-marker-end-3)" data-snap="END:arc_1448493614866_0:P1"></line><foreignObject class="lab" x="133.61213604317606" y="-168.02456530190886" width="183" height="72" transform="rotate(0,225.11213604317606,-132.02456530190886)" data-shape-id="lab_1448493657773_3" style="cursor: default;" data-resized="false" data-snap="BL:arc_1448493614866_0:P1;BL:vector_1448493635092_2:END"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class=""><button class="mathjax-render-zone bs-mathjax" contenteditable="false"><script type="text/mathjax-placeholder" class="mathjax-placeholder">\vec{A} \times \vec{B} = \left| \begin{matrix} \vec{i} &amp; \vec{j} &amp; \vec{k} \\ A_x &amp; A_y &amp; A_z \\ B_x &amp; B_y &amp; B_z \end{matrix} \right|</script></button></div></foreignObject><foreignObject class="lab" x="222.97479003876336" y="4.731701945154718" width="30" height="24.99999999999985" transform="rotate(0,237.97479003876336,17.231701945154644)" data-shape-id="lab_1448493691609_4" style="cursor: default;" data-resized="false" data-snap="BL:vector_1448493635092_2:START!END:-36.08661863675874,-33.35447189764953"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class=""><button class="variable-container variable1448493695970 finished" tabindex="-1" data-suffix="text" data-unit-rounding="" contenteditable="false">foo</button></div></foreignObject><foreignObject class="lab" x="259.0614086755221" y="63.0861738428041" width="97" height="25.000000000000185" transform="rotate(0,307.5614086755221,75.58617384280419)" data-shape-id="lab_1448493705280_5" data-resized="false" style="cursor: default;" data-snap="TL:vector_1448493635092_2:START"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class=""><button class="variable-container variable1448493709648 finished" tabindex="-1" data-suffix="text" data-unit-rounding="" contenteditable="false">longvarname</button></div></foreignObject><g class="group-DetailedPin" children="[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object],[object Object]" width="50" height="60" no-box-points="true" no-centroid="true" transform="rotate(0,-186.0907969195183,-14.58975500854558)" data-shape-id="DetailedPin_1448493738946_6" style="cursor: default;"><line x1="-211.0907969195183" y1="-9.58975500854558" x2="-161.0907969195183" y2="-9.58975500854558" style="stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-186.0907969195183,-9.58975500854558)"></line><rect x="-211.0907969195183" y="-9.58975500854558" width="50" height="25" fill="url(#DetailedPin_1448493738946_6-c1-fill-3)" transform="rotate(0,-186.0907969195183,2.9102449914544195)"></rect><path d="M -198.53 -32.05 L -198.53 -9.55 L -173.53 -9.55 L -173.53 -32.05" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;"></path><path d="M -198.53 -32.05 A 12.5 12.5 0 0 1 -173.53 -32.05" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-186.0907969195183,-38.339755008545595)"></path><rect x="-211.0907969195183" y="-14.58975500854558" width="50" height="5" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-186.0907969195183,-12.08975500854558)"></rect><rect x="-208.5907969195183" y="-17.08975500854558" width="5" height="5" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-206.0907969195183,-14.58975500854558)"></rect><rect x="-168.5907969195183" y="-17.08975500854558" width="5" height="5" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-166.0907969195183,-14.58975500854558)"></rect><circle r="2" cx="-186.0907969195183" cy="-34.589755008545595" data-ignore-style="true" style="fill: rgb(100, 100, 100); stroke: rgb(0, 0, 0); stroke-width: 0.5px;" transform="rotate(0,-186.0907969195183,-34.589755008545595)"></circle></g><g class="group-Beam" children="[object Object],[object Object],[object Object]" beam-height="40" beam-padding="0" transform="rotate(0,-87.60023088178251,129.99515065183166)" data-shape-id="Beam_1448493753693_7" style="cursor: default;"><rect x="-185.24174031574475" y="109.99515065183171" width="195.28301886792448" height="39.99999999999993" style="fill: rgb(211, 211, 211); stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,-87.60023088178251,129.99515065183166)"></rect><line x1="-185.24174031574475" y1="114.99515065183182" x2="10.041278552179733" y2="114.99515065183182" style="stroke: rgb(50, 50, 50); stroke-width: 1px;" transform="rotate(0,-87.60023088178251,114.99515065183182)"></line><line x1="-185.24174031574475" y1="144.9951506518317" x2="10.041278552179733" y2="144.9951506518317" style="stroke: rgb(50, 50, 50); stroke-width: 1px;" transform="rotate(0,-87.60023088178251,144.9951506518317)"></line></g><g class="group-WallSupport" children="[object Object],[object Object]" wall-depth="25" no-box-points="true" no-centroid="true" transform="rotate(179.99999999999986,22.541278552179556,129.99515065183164)" data-shape-id="WallSupport_1448493755860_8" style="cursor: default;" data-snap="gR:Beam_1448493753693_7:gEND"><line x1="35.04127855217962" y1="47.44798084051099" x2="35.04127855217962" y2="212.5423204631523" style="stroke: rgb(0, 0, 0); stroke-width: 2px;" transform="rotate(0,35.04127855217962,129.99515065183164)"></line><rect x="10.041278552179499" y="47.44798084051099" width="25.000000000000085" height="165.09433962264131" fill="url(#WallSupport_1448493755860_8-c1-fill-3)" transform="rotate(0,22.54127855217954,129.99515065183164)"></rect></g><foreignObject class="lab" x="-210.24174031574478" y="-205.1463587821305" width="30" height="25" transform="rotate(0,-195.24174031574478,-192.6463587821305)" data-shape-id="lab_1448493765175_9" style="cursor: default;" data-resized="false"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class="active"><button class="mathjax-render-zone bs-mathjax" contenteditable="false"><span class="MathJax_Preview"></span><span class="MathJax_SVG" id="MathJax-Element-93-Frame" role="math" style="font-size: 100%; display: inline-block;"><svg xmlns:xlink="http://www.w3.org/1999/xlink" width="0ex" height="0.138ex" viewBox="0 -16.8 0 33.6" style="vertical-align: -0.138ex; margin: 1px 0ex;"><g stroke="currentColor" fill="currentColor" stroke-width="0" transform="matrix(1 0 0 -1 0 0)"></g></svg></span></button></div></foreignObject><foreignObject class="lab" x="-234.3281284066029" y="-160.36132803155283" width="92" height="66.00000000000001" transform="rotate(0,-188.3281284066029,-127.36132803155283)" data-shape-id="lab_1448493803628_12" style="cursor: default;" data-resized="false"><div style="text-align: center; width: 100%; height: 100%;" contenteditable="false" class=""><button class="mathjax-render-zone bs-mathjax" contenteditable="false"><script type="text/mathjax-placeholder" class="mathjax-placeholder">\left[ \begin{matrix} 1 &amp; 0 &amp; 0 \\ 0 &amp; 1 &amp; 0 \\ 0 &amp; 0 &amp; 1 \end{matrix} \right]</script></button></div></foreignObject></svg></button><div class="space"></div><div class="space"><b><u><strike>asdasdasd blah blahg</strike> asdkfask;lfdj<i> ;asjd;lasjdl&nbsp;</i></u></b></div><br></div></div><div style="text-align: left;"><br></div>
 
 $$ \theta + \beta = 90^\circ $$
 

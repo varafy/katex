@@ -63,6 +63,7 @@ function multipleIncludeJs(jsArray, done) {
 
   var url = jsArray.shift();
   page.includeJs(url, function(){
+    console.log('Loaded Url:', url);
     multipleIncludeJs(jsArray, done);
   });
 }
@@ -71,8 +72,11 @@ page.content = html;
 var MathJaxJS = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG-full';
 var JQueryJS = 'http://code.jquery.com/jquery-2.1.4.min.js';
 multipleIncludeJs([JQueryJS, MathJaxJS],function() {
-  console.log('jQuery loaded');
-  // page.injectJS('test-html.js');
+  if (!page.injectJs('test-html.js')) {
+    console.log('Could not injectJs.');
+    phantom.exit(0);
+    return;
+  }
   var interval;
   var allDone;
   allDone = page.evaluate(function () {
@@ -98,7 +102,7 @@ multipleIncludeJs([JQueryJS, MathJaxJS],function() {
         return window.allDone;
       });
 
-      console.log(allDone);
+      console.log(allDone ? '::finished' : '::rendering');
 
       if (allDone) {
         clearInterval(interval);
