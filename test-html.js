@@ -93,26 +93,27 @@ $(function() {
   };
 
   console.log(HtmlToLatex);
-  var $variableContainers = $('button.mathjax-render-zone');
-  $variableContainers.each(function() {
-      var $this = $(this);
-      //console.log($this);
-      $this.replaceWith(function() {
-          if (!$this.children('script.mathjax-placeholder')[0]) {
-              console.log($this[0]);
-              return '';
-          }
+  var $variableContainers = $('.mathjax-render-zone');
+  $variableContainers.html(function() {
+    var $this = $(this);
+    if (!$this.children('script.mathjax-placeholder')[0]) {
+      console.log($this[0]);
+      return '';
+    }
 
-          var mathjaxScriptTagHtml = $this.children('script.mathjax-placeholder')[0].innerHTML;
-          //console.log(mathjaxScriptTagHtml);
-          var returnStr = HtmlToLatex.parseMathjaxInput(mathjaxScriptTagHtml);
+    var mathjaxScriptTagHtml = $this.children('script.mathjax-placeholder')[0].innerHTML;
+    var returnStr = HtmlToLatex.parseMathjaxInput(mathjaxScriptTagHtml);
 
-          var string;
-          returnStr.done(function(html) {
-              string = html;
-          });
-          //console.log(string);
-          return '$\\displaystyle{' + string + '}$';
-      });
+    var string;
+    returnStr.done(function(html) {
+      string = html;
+    });
+    return '$\\displaystyle{' + string + '}$';
+  }).each(function(){
+    MathJax.Hub.Queue(["Typeset", MathJax.Hub, this]);
+  });
+
+  MathJax.Hub.Queue(function() {
+    window.allDone = 1;
   });
 });
