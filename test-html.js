@@ -92,35 +92,50 @@ $(function() {
       return defrd.promise();
   };
 
-  console.log(HtmlToLatex);
-  var $variableContainers = $('.mathjax-render-zone');
-  var deferredArr = [];
-  $variableContainers.each(function() {
-    var deferred = $.Deferred();
-    var _this = this;
-    var $this = $(this);
-    if (!$this.children('script.mathjax-placeholder')[0]) {
-      console.log($this[0]);
-      return '';
-    }
+  MathJax.Hub.Queue(['Typeset', MathJax.Hub]);
 
-    var mathjaxScriptTagHtml = $this.children('script.mathjax-placeholder')[0].innerHTML;
-    var returnStr = HtmlToLatex.parseMathjaxInput(mathjaxScriptTagHtml);
+  MathJax.Hub.Queue(function() {
+    console.log(HtmlToLatex);
+    var $variableContainers = $('.mathjax-render-zone');
+    var deferredArr = [];
+    window.renderStatus = [];
+    $variableContainers.each(function() {
+      var idx = deferredArr.length;
+      var deferred = $.Deferred();
+      deferredArr.push(deferred);
 
-    var string;
-    returnStr.done(function(html) {
-      string = html;
-    });
-    var latex = '$\\displaystyle{' + string + '}$';
-    MathJax.Hub.Typeset(_this, function() {
-      var jax = MathJax.Hub.getAllJax(_this)[0];
-      jax.Text(latex, function() {
+      var _this = this;
+      var $this = $(this);
+      if (!$this.children('script.mathjax-placeholder')[0]) {
+        window.renderStatus[idx] = 'ERROR';
         deferred.resolve();
-      });
-    });
-  })
+        return '';
+      }
 
-  $.when.apply($, deferredArr).done(function(){
-    window.allDone = 1;
+      var mathjaxScriptTagHtml = $this.children('script.mathjax-placeholder')[0].innerHTML;
+      var returnStr = HtmlToLatex.parseMathjaxInput(mathjaxScriptTagHtml);
+
+      var string;
+      returnStr.done(function(html) {
+        string = html;
+      });
+      var latex = '\\displaystyle{' + string + '}';
+      $this.html('${}$');
+      console.log('seen math:', _this);
+
+      window.renderStatus[idx] = 'Typesetting';
+      MathJax.Hub.Typeset(_this, function() {
+        var jax = MathJax.Hub.getAllJax(_this)[0];
+        window.renderStatus[idx] = 'TextSetting';
+        jax.Text(latex, function() {
+          window.renderStatus[idx] = 'Finished';
+          deferred.resolve();
+        });
+      });
+    })
+
+    $.when.apply($, deferredArr).done(function(){
+      window.allDone = 1;
+    });
   });
 });

@@ -12,6 +12,9 @@ var webpage = require('webpage');
 var html = fs.read('test.html');
 var page = webpage.create();
 
+var IMAGE_NAME = 'rendered/test.png';
+var IMAGE_HTML_NAME = 'rendered/test.html';
+
 page.paperSize = {
   format: 'Letter',
   orientation: 'portrait'
@@ -40,8 +43,8 @@ function renderThumbnail(err) {
   if (err) {
     console.log(err);
   } else {
-    //console.log('Post Load:', page.content);
-    page.render('google.png', {format: 'png'});
+    page.render(IMAGE_NAME, {format: 'png'});
+    fs.write(IMAGE_HTML_NAME, page.content, 'w');
   }
 
   phantom.exit(0);
@@ -102,11 +105,25 @@ multipleIncludeJs([JQueryJS, MathJaxJS], function() {
     console.log('window.MathJax does exists.');
     console.log('Started Rendering...');
     interval = setInterval(function () {
+      var statusArr = page.evaluate(function() {
+        return window.renderStatus;
+      });
+
       var allDone = page.evaluate(function () {
         return window.allDone;
       });
 
       console.log(allDone ? '::finished' : '::rendering', '-', (performance.now() - time).toFixed(2), 'ms');
+
+      if (statusArr) {
+        var statusCount = countBy(statusArr);
+        var strCon = '{ ';
+        for (var stKey in statusCount) {
+          if (!statusCount.hasOwnProperty(stKey)) return;
+          strCon += stKey + ': ' + statusCount[stKey] + ', ';
+        }
+        console.log(strCon + '}');
+      }
 
       if (allDone) {
         clearInterval(interval);
@@ -114,4 +131,16 @@ multipleIncludeJs([JQueryJS, MathJaxJS], function() {
       }
     }, 100);
   }
-})
+});
+
+function countBy(arr, pred) {
+  var hash = {};
+  pred = pred || function(val) { return val; };
+  for (var i = 0, n = arr.length; i < n; i++) {
+    var val = arr[i];
+    var key = pred(val, i, arr);
+    hash[key] = (hash[key] + 1) || 1;
+  }
+
+  return hash;
+}

@@ -61,6 +61,7 @@
             border: 0;
             padding: 0;
             display: inline-block;
+            position: relative;
             background: transparent;
             line-height: inherit;
             font-size: inherit;
@@ -365,6 +366,7 @@ variable.finished,
       showProcessingMessages: false,
       showMathMenu: false,
       messageStyle: 'none',
+      skipStartupTypeset: true,
       tex2jax: {
         inlineMath: [["$","$"],["\\(","\\)"]],
         skipTags: ["variable", "script"]
@@ -383,8 +385,6 @@ variable.finished,
         };
     </script>-->
     <!-- TODO: why does the MathJax get rendered as SVG -->
-    <!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG-full"></script>
-    <script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>-->
 </head>
 <body>
 
@@ -417,6 +417,8 @@ $$ u=\frac{a}{b} \qquad \tan^2(u)=\frac{1-\cos(2u)}{1+\cos(2u)} $$
 $$ \sin(\theta) \qquad \cos(60^{\circ}) = 0.5 \qquad \tan(\pi/2) = \text{undefined} $$
 
 $$ \sum_{n = 1}^\infty \frac{1}{n} = \frac{\pi^2}{6} $$
+
+<div style="opacity: 0;">$$ \class{dog}{ruff} $$</div>
 
 <svg width="0" height="0" style="position: absolute;">
     <defs id="leo-core-definitions">
@@ -464,10 +466,10 @@ $$ \sum_{n = 1}^\infty \frac{1}{n} = \frac{\pi^2}{6} $$
     </defs>
 </svg>
 
-<!--<script type="text/javascript" src="test-html.js"></script>-->
-<script>
 
-</script>
+<!--<script type="text/javascript" src="http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG-full"></script>
+<script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script>
+<script type="text/javascript" src="test-html.js"></script>-->
 
 </body>
 </html>
