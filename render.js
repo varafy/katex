@@ -8,8 +8,8 @@
 var fs = require('fs');
 var system = require('system');
 var webpage = require('webpage');
-var html = system.args[1];
-// var html = fs.read('test.html');
+// var html = system.args[1];
+var html = fs.read('test.html');
 var page = webpage.create();
 
 page.paperSize = {
@@ -23,7 +23,7 @@ page.paperSize = {
   }*/
 };
 
-console.log('calling render');
+console.log('calling render on html of length:', html.length);
 //console.log(page.content);
 /*page.render('google.pdf', {format: 'pdf'}, function(err) {
   if (err) {
@@ -36,7 +36,7 @@ console.log('calling render');
 });*/
 
 function renderThumbnail(err) {
-  console.log('calling renderThumbnail');
+  console.log('Calling renderThumbnail');
   if (err) {
     console.log(err);
   } else {
@@ -55,18 +55,26 @@ page.onLoadStarted = function () {
 //  console.log('finished with status:', status);
 //  console.log(page.content)
 //};
-
-page.open('test.html', function(success) {
-  //console.log('Pre Load Content: ' + page.content);
-  var interval;
-  var allDone;
-
-  if (!success) {
-    renderThumbnail(new Error('Error rendering page'));
+function multipleIncludeJs(jsArray, done) {
+  if (jsArray.length === 0) {
+    done();
     return;
   }
 
-  // set hook for when MathJax is done
+  var url = jsArray.shift();
+  page.includeJs(url, function(){
+    multipleIncludeJs(jsArray, done);
+  });
+}
+
+page.content = html;
+var MathJaxJS = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG-full';
+var JQueryJS = 'http://code.jquery.com/jquery-2.1.4.min.js';
+multipleIncludeJs([JQueryJS, MathJaxJS],function() {
+  console.log('jQuery loaded');
+  // page.injectJS('test-html.js');
+  var interval;
+  var allDone;
   allDone = page.evaluate(function () {
     if (window.MathJax) {
       MathJax.Hub.Register.StartupHook('End', function () {
@@ -80,21 +88,22 @@ page.open('test.html', function(success) {
   });
 
   if (allDone) {
+    console.log('No MathJax');
+    console.log('Content.length:', page.content && page.content.length);
     renderThumbnail();
-    return;
+  } else {
+    console.log('Yes MathJax');
+    interval = setInterval(function () {
+      var allDone = page.evaluate(function () {
+        return window.allDone;
+      });
+
+      console.log(allDone);
+
+      if (allDone) {
+        clearInterval(interval);
+        renderThumbnail();
+      }
+    }, 100);
   }
-
-  interval = setInterval(function () {
-    var allDone = page.evaluate(function () {
-      return window.allDone;
-    });
-
-    console.log(allDone);
-
-    if (allDone) {
-      clearInterval(interval);
-      renderThumbnail();
-    }
-  }, 100);
-//});
-});
+})
