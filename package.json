@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "ejs": "^2.3.4",
-    "phantomjs": "1.9.2-2"
+    "node-phantom": "^0.2.5",
+    "phantom": "^0.8.3"
   }
 }
