@@ -81,9 +81,9 @@ multipleIncludeJs([JQueryJS, MathJaxJS],function() {
   var allDone;
   allDone = page.evaluate(function () {
     if (window.MathJax) {
-      MathJax.Hub.Register.StartupHook('End', function () {
-        window.allDone = 1;
-      });
+      // MathJax.Hub.Register.StartupHook('End', function () {
+      //   window.allDone = 1;
+      // });
 
       return false;
     } else {

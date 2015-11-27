@@ -10,28 +10,50 @@ var ejs = require('ejs');
 var fs = require('fs');
 var childProcess = require('child_process');
 //var phantom = require('phantom');
-var phantom = require('node-phantom');
+// var phantom = require('node-phantom');
 //var phantomjs = require('phantomjs');
 var binPath = 'phantomjs';
+var runImm = process.argv[2] === '--run';
+console.log('Arguments:')
+process.argv.forEach(function(val, key) {
+  console.log('  ' + key + ': ' + val);
+});
 
 var template = ejs.compile(fs.readFileSync(__dirname + '/thumbpage.ejs', 'utf-8'));
 
 var renderThumbnail = function(html, cb) {
-  console.log(html);
-  var content = template({
-    html: html
-  });
+  console.log('HTML.length:', html.length);
+  var content = '';
+  // var content = template({
+  //   html: html
+  // });
 
   console.log('CONTENT_LENGTH:', content.length);
 
-  /*var childArgs = [path.join(__dirname, 'render.js'), content];
+  var childArgs = [path.join(__dirname, 'render.js'), content];
   console.log(binPath, path.join(__dirname, 'render.js'), 'length: ' + content.length);
 
-  childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
-    // handle results
-    if (err) throw err;
-    cb(stdout);
-  });*/
+  var child = childProcess.spawn(binPath, childArgs);
+
+  child.stdout.on('data', function (data) {
+    console.log('stdout: ' + data);
+  });
+
+  child.stderr.on('data', function (data) {
+    console.log('stderr: ' + data);
+  });
+
+  child.on('close', function (code) {
+    console.log('child process exited with code ' + code);
+  });
+
+  // childProcess.exec(binPath, childArgs, function(err, stdout, stderr) {
+  //   console.log('return:', arguments);
+
+  //   // handle results
+  //   if (err) throw err;
+  //   cb(stdout);
+  // });
 
   /*phantom.create(function(ph) {
     function render(err) {
@@ -122,41 +144,48 @@ var renderThumbnail = function(html, cb) {
     });
   });*/
 
-  phantom.create(function(error, ph) {
-    ph.createPage(function(error, page) {
-      page.settings = {
-        loadImages: true,
-        localToRemoteUrlAccessEnabled: true,
-        javascriptEnabled: true,
-        loadPlugins: false
-      };
+  // phantom.create(function(error, ph) {
+  //   ph.createPage(function(error, page) {
+  //     page.settings = {
+  //       loadImages: true,
+  //       localToRemoteUrlAccessEnabled: true,
+  //       javascriptEnabled: true,
+  //       loadPlugins: false
+  //     };
 
-      page.set('viewportSize', { width: 800, height: 600 });
-      page.set('paperSize', { format: 'A4', orientation: 'portrait', border: '1cm' });
-      page.set('content', html, function(error) {
-        if (error) {
-          console.log('Error setting content: ', error);
-        }
-      });
+  //     page.set('viewportSize', { width: 800, height: 600 });
+  //     page.set('paperSize', { format: 'A4', orientation: 'portrait', border: '1cm' });
+  //     page.set('content', html, function(error) {
+  //       if (error) {
+  //         console.log('Error setting content: ', error);
+  //       }
+  //     });
 
-      page.onResourceRequested = function(rd, req) {
-        console.log("REQUESTING: ", rd[0]["url"]);
-      };
+  //     page.onResourceRequested = function(rd, req) {
+  //       console.log("REQUESTING: ", rd[0]["url"]);
+  //     };
 
-      page.onResourceReceived = function(rd) {
-        rd.stage == "end" && console.log("LOADED: ", rd["url"]);
-      };
+  //     page.onResourceReceived = function(rd) {
+  //       rd.stage == "end" && console.log("LOADED: ", rd["url"]);
+  //     };
 
-      page.onLoadFinished = function(status) {
-        page.render('google.png', function(error) {
-          if (error) console.log('Error rendering PNG: %s', error);
-          console.log("PDF GENERATED : ", status);
-          ph.exit();
-          cb && cb();
-        });
-      };
-    });
-  });
+  //     page.onLoadFinished = function(status) {
+  //       page.render('google.png', function(error) {
+  //         if (error) console.log('Error rendering PNG: %s', error);
+  //         console.log("PDF GENERATED : ", status);
+  //         ph.exit();
+  //         cb && cb();
+  //       });
+  //     };
+  //   });
+  // });
 };
+
+if (runImm) {
+  console.log('Running immediately.');
+  renderThumbnail(fs.readFileSync('test.html').toString(), function() {
+    console.log('Proccess finished.');
+  });
+}
 
 module.exports = renderThumbnail;
