@@ -71,12 +71,14 @@ function multipleIncludeJs(jsArray, done) {
 page.content = html;
 var MathJaxJS = 'http://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_SVG-full';
 var JQueryJS = 'http://code.jquery.com/jquery-2.1.4.min.js';
-multipleIncludeJs([JQueryJS, MathJaxJS],function() {
+
+multipleIncludeJs([JQueryJS, MathJaxJS], function() {
   if (!page.injectJs('test-html.js')) {
     console.log('Could not injectJs.');
     phantom.exit(0);
     return;
   }
+
   var interval;
   var allDone;
   allDone = page.evaluate(function () {

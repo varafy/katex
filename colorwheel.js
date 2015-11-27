@@ -1,6 +1,7 @@
 var page = require('webpage').create();
 page.viewportSize = { width: 400, height : 400 };
-page.content = '<html><body><canvas id="surface"></canvas></body></html>';
+page.content = '<html><head><script type="text/javascript" src="http://code.jquery.com/jquery-2.1.4.min.js"></script></head><body><canvas id="surface"></canvas></body></html>';
+console.log(page.content);
 page.evaluate(function() {
     var el = document.getElementById('surface'),
         context = el.getContext('2d'),

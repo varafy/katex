@@ -24,14 +24,14 @@ var renderThumbnail = function(html, cb) {
 
   console.log('CONTENT_LENGTH:', content.length);
 
-  /*var childArgs = [path.join(__dirname, 'render.js'), content];
+  var childArgs = [path.join(__dirname, 'render.js'), content];
   console.log(binPath, path.join(__dirname, 'render.js'), 'length: ' + content.length);
 
   childProcess.execFile(binPath, childArgs, function(err, stdout, stderr) {
     // handle results
     if (err) throw err;
     cb(stdout);
-  });*/
+  });
 
   /*phantom.create(function(ph) {
     function render(err) {
