@@ -1,4 +1,7 @@
+window.recievedTestHtmlJs = true;
+
 $(function() {
+  window.recievedTestHtmlJs$ = true;
   var HtmlToLatex = {};
   //(function(HtmlToLatex) {
   var isAllowed = function($el) {
