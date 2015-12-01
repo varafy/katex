@@ -78,8 +78,9 @@ var renderThumbnail = function(html, cb) {
         }
 
         function renderThumbnail() {
-          page.render(RENDERED_IMAGE_DIR, function(error) {
-            if (error) console.log('Error rendering PNG: %s', error);
+          page.renderBase64('PNG', function(base64) {
+            if (!base64) console.log('WAHGHHH no base64:', base64);
+            fs.writeFileSync('rendered/thumbnail_64.txt', base64);
             console.log("::PDF GENERATED");
             ph.exit();
             cb && cb();
